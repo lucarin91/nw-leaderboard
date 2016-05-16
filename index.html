@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html ng-app="LeaderBoard">
+
+<head>
+    <title>LeaderBoard</title>
+    <script type="text/javascript" src="node_modules/jquery/dist/jquery.js"></script>
+
+    <script type="text/javascript" src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
+    <link type="text/css" rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css" />
+    <script type="text/javascript" src="node_modules/angular/angular.js"></script>
+    <script type="text/javascript" src="main.js"></script>
+
+</head>
+
+<body>
+    <div ng-controller="BoardCtrl" class="container">
+        <h1 class="text-center">Leaderboard Snake</h1>
+        <table class="table table-striped">
+            <tr>
+                <th>#</th>
+                <th>NOME</th>
+                <th>SCORE</th>
+                <th></th>
+            </tr>
+            <tr ng-repeat="item in rows | orderBy: '-score'">
+                <td ng-bind="{{ $index + 1 }}"></td>
+                <td ng-bind="item.name"></td>
+                <td ng-bind="item.score"></td>
+                <td ng-click="remove($index)">
+                    <span class="glyphicon glyphicon-remove-circle"></span>
+                </td>
+            </tr>
+        </table>
+
+        <form class="form-inline">
+            <div class="form-group">
+                <input ng-model="input.name" type="text" class="form-control" placeholder="Nome">
+            </div>
+            <div class="form-group">
+                <input ng-model="input.score" type="number" class="form-control" placeholder="score">
+            </div>
+            <button ng-click="add(input.name, input.score)" type="submit" class="btn btn-default">add</button>
+        </form>
+    </div>
+</body>
+
+</html>
